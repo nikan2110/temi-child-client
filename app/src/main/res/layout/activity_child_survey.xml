@@ -1,0 +1,137 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layoutDirection="rtl"
+    android:padding="16dp"
+    android:gravity="center_horizontal"
+    android:background="#F5F5F5">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:theme="@style/Widget.AppCompat.ProgressBar" />
+
+    <ImageView
+        android:id="@+id/resultImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/rimon_logo"
+        android:visibility="gone"
+        android:layout_gravity="center"
+        android:contentDescription="Result Image" />
+
+    <!-- Вопрос -->
+    <TextView
+        android:id="@+id/questionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="שאלה"
+        android:textSize="24sp"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:layout_marginBottom="32dp"
+        android:textDirection="rtl" />
+
+    <!-- Поле ввода возраста -->
+    <EditText
+        android:id="@+id/ageInput"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:hint="הזן את הגיל שלך"
+        android:inputType="number"
+        android:visibility="gone"
+        android:layout_marginBottom="32dp"
+        android:gravity="center"
+        android:textDirection="rtl" />
+
+    <!-- Кнопка "Далее" -->
+    <Button
+        android:id="@+id/nextButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="הבא"
+        android:backgroundTint="#03A9F4"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:visibility="gone"
+        android:padding="16dp"
+        android:textDirection="rtl" />
+
+    <!-- Кнопки "כן" и "לא" -->
+    <LinearLayout
+        android:id="@+id/yesNoButtonsLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="32dp"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/yesButton"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="כן"
+            android:textSize="24sp"
+            android:layout_marginEnd="32dp"
+            android:backgroundTint="#4CAF50"
+            android:textColor="#FFFFFF"
+            android:padding="16dp"
+            android:textDirection="rtl" />
+
+        <Button
+            android:id="@+id/noButton"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="לא"
+            android:textSize="24sp"
+            android:backgroundTint="#F44336"
+            android:textColor="#FFFFFF"
+            android:padding="16dp"
+            android:textDirection="rtl" />
+    </LinearLayout>
+
+    <!-- Поле ввода дополнительной информации -->
+    <EditText
+        android:id="@+id/additionalInfoInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="הזן מידע נוסף:"
+        android:visibility="gone"
+        android:layout_marginBottom="32dp"
+        android:textDirection="rtl" />
+
+    <!-- Кнопка "שלח" -->
+    <Button
+        android:id="@+id/submitButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="שלח"
+        android:backgroundTint="#03A9F4"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:visibility="gone"
+        android:padding="16dp"
+        android:textDirection="rtl" />
+
+    <!-- Поле для отображения результата -->
+    <TextView
+        android:id="@+id/resultText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginTop="16dp"
+        android:padding="16dp"
+        android:gravity="center"
+        android:background="#E0E0E0"
+        android:textSize="18sp"
+        android:textColor="#000000"
+        android:text="Результат будет отображён здесь"
+        android:textDirection="rtl" />
+</LinearLayout>

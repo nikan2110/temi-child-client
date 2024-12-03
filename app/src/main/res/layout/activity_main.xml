@@ -1,0 +1,249 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/balloons">
+
+
+    <!-- Логотип -->
+    <ImageView
+        android:id="@+id/logoImage"
+        android:layout_width="280dp"
+        android:layout_height="112dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="Logo"
+        android:scaleType="fitCenter"
+        android:src="@drawable/meuhedet_logo"
+        app:layout_constraintBottom_toTopOf="@+id/leftButtons"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/leftButtons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="100dp"
+        android:layout_marginStart="16dp">
+
+        <!-- Кнопка 1 -->
+        <ImageButton
+            android:id="@+id/musicButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/button_sing"
+            android:contentDescription="Music Button"
+            android:background="@android:color/transparent" />
+
+        <!-- Кнопка 2 -->
+        <ImageButton
+            android:id="@+id/danceButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/button_dance"
+            android:contentDescription="Dance Button"
+            android:background="@android:color/transparent"
+            android:layout_marginTop="16dp" />
+
+        <!-- Кнопка 3 -->
+        <ImageButton
+            android:id="@+id/chatButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="Chat Button"
+            android:src="@drawable/button_talk" />
+
+    </LinearLayout>
+
+    <!-- Текст в правом верхнем углу -->
+    <TextView
+        android:id="@+id/topRightText"
+        android:layout_width="486dp"
+        android:layout_height="95dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="36dp"
+        android:text="מה הגיל שלי?"
+        android:textSize="90sp"
+        android:lineHeight="97sp"
+        android:textColor="#3E3E3E"
+        android:fontFamily="@font/hebrew_font"
+        android:textStyle="bold"
+        android:gravity="end"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <ImageButton
+        android:id="@+id/rightButton1"
+        android:layout_width="363dp"
+        android:layout_height="356dp"
+        android:layout_marginTop="224dp"
+        android:layout_marginEnd="4dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Button 1"
+        android:src="@drawable/button_parents"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topRightText" />
+
+    <ImageButton
+        android:id="@+id/rightButton2"
+        android:layout_width="229dp"
+        android:layout_height="220dp"
+        android:layout_marginTop="-75dp"
+        android:layout_marginEnd="200dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Button 2"
+        android:src="@drawable/button_seker"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rightButton1" />
+
+    <!-- Кнопка для иврита -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/hebButtonLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/araButtonLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="-15dp"
+        android:layout_marginEnd="0dp">
+
+        <ImageView
+            android:id="@+id/hebButtonBackground"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/button_language_on"
+            android:contentDescription="Hebrew Button Background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/topRightText"/>
+
+        <TextView
+            android:id="@+id/hebButtonText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:lineHeight="47sp"
+            android:text="עברית"
+            android:textColor="#FFFFFF"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/hebButtonBackground"
+            app:layout_constraintEnd_toEndOf="@+id/hebButtonBackground"
+            app:layout_constraintStart_toStartOf="@+id/hebButtonBackground"
+            app:layout_constraintTop_toTopOf="@+id/hebButtonBackground"
+            app:layout_constraintVertical_bias="0.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Кнопка для арабского -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/araButtonLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/rusButtonLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="-15dp"
+        android:layout_marginEnd="0dp">
+
+        <ImageView
+            android:id="@+id/araButtonBackground"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/button_language_off"
+            android:contentDescription="Arabic Button Background"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/araButtonText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:text="العربية"
+            android:lineHeight="47sp"
+            android:textColor="#848484"
+            android:textSize="36sp"
+            app:layout_constraintBottom_toBottomOf="@+id/araButtonBackground"
+            app:layout_constraintEnd_toEndOf="@+id/araButtonBackground"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="@+id/araButtonBackground"
+            app:layout_constraintTop_toTopOf="@+id/araButtonBackground"
+            app:layout_constraintVertical_bias="0.363" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Кнопка для русского -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/rusButtonLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="-15dp"
+        android:layout_marginEnd="0dp">
+
+        <ImageView
+            android:id="@+id/rusButtonBackground"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/button_language_off"
+            android:contentDescription="Russian Button Background" />
+
+        <TextView
+            android:id="@+id/rusButtonText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:text="Русский"
+            android:lineHeight="42sp"
+            android:textColor="#848484"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toBottomOf="@+id/rusButtonBackground"
+            app:layout_constraintEnd_toEndOf="@+id/rusButtonBackground"
+            app:layout_constraintStart_toStartOf="@+id/rusButtonBackground"
+            app:layout_constraintTop_toTopOf="@+id/rusButtonBackground"
+            app:layout_constraintVertical_bias="0.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <EditText
+        android:id="@+id/ageInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="260dp"
+        android:background="#E7E9E6"
+        android:fontFamily="@font/hebrew_font"
+        android:gravity="center"
+        android:hint="הזן גיל"
+        android:inputType="number"
+        android:lineHeight="97sp"
+        android:padding="8dp"
+        android:textColor="#3E3E3E"
+        android:textSize="90sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topRightText" />
+
+    <Button
+        android:id="@+id/okButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#E7E9E6"
+        android:fontFamily="@font/hebrew_font"
+        android:lineHeight="97sp"
+        android:text="אוקיי"
+        android:textColor="#3E3E3E"
+        android:textSize="55sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/ageInput"
+        app:layout_constraintTop_toTopOf="@id/ageInput" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
