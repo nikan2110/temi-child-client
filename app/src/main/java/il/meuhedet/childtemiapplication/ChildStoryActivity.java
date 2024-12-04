@@ -1,9 +1,11 @@
 package il.meuhedet.childtemiapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,7 +29,8 @@ public class ChildStoryActivity extends AppCompatActivity {
     private TextView storyText;
     private EditText nameInput;
     private Button submitButton;
-    private ProgressBar progressBar; // Добавляем ProgressBar
+    private ProgressBar progressBar;
+    private ImageButton backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,14 @@ public class ChildStoryActivity extends AppCompatActivity {
         nameInput = findViewById(R.id.nameInput);
         submitButton = findViewById(R.id.submitButton);
         progressBar = findViewById(R.id.progressBar);
+        backButton = findViewById(R.id.backButton);
+
+        backButton.setOnClickListener(view -> {
+            backButton.setImageResource(R.drawable.button_back_on);
+            finish();
+            Intent intent = new Intent(ChildStoryActivity.this, MainActivity.class);
+            startActivity(intent);
+        });
 
         Toast.makeText(this, "Tell me your name and I'll tell you a story about you!",
                 Toast.LENGTH_LONG).show();

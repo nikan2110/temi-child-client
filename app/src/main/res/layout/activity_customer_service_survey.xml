@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     tools:context=".CustomerServiceSurveyActivity"
-    android:background="#DAF4F5"
+    android:background="#E7E9E6"
     android:orientation="vertical">
 
 
@@ -14,14 +14,14 @@
         android:layout_height="150dp"
         android:gravity="end"
         android:orientation="horizontal"
-        android:background="@drawable/header_background">
+        android:background="#E7E9E6">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
             android:layout_marginTop="19dp"
-            android:background="@drawable/rimon_logo"
+            android:background="@drawable/meuhedet_logo"
             android:scaleType="fitXY">
         </ImageView>
 

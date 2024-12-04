@@ -93,7 +93,7 @@
         app:layout_constraintTop_toBottomOf="@id/topRightText" />
 
     <ImageButton
-        android:id="@+id/rightButton2"
+        android:id="@+id/sekerButton"
         android:layout_width="229dp"
         android:layout_height="220dp"
         android:layout_marginTop="-75dp"
@@ -120,8 +120,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/button_language_on"
             android:contentDescription="Hebrew Button Background"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/topRightText"/>
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/hebButtonText"

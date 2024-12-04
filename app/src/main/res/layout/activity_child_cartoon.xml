@@ -2,7 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000">
+    android:background="#E7E9E6">
 
     <VideoView
         android:id="@+id/videoView"
@@ -20,5 +20,18 @@
         android:text="Pause"
         android:backgroundTint="#03A9F4"
         android:textColor="#FFFFFF" />
+
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="71dp"
+        android:layout_marginBottom="39dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Back Button"
+        android:src="@drawable/button_back" />
+
 
 </RelativeLayout>

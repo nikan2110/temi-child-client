@@ -8,7 +8,7 @@ public class Constants {
     public static final String OPTION3 = getEmojiByUnicode(0x1F614) + " מרוצה במידה בינונית ";
     public static final String OPTION4 = getEmojiByUnicode(0x1F621) + " כלל לא מרוצה ";
 
-    public static final String URL = "http://172.18.1.24:8080/";
+    public static final String URL = "http://10.100.102.128:8080/";
 
     public static ArrayList<Question> getQuestions() {
         ArrayList<Question> questionsList = new ArrayList<>();
