@@ -15,7 +15,6 @@ public class ChildCartoonActivity extends AppCompatActivity {
     private VideoView videoView;
     private Button pausePlayButton;
     private boolean isPlaying = true;
-
     private ImageButton backButton;
 
     @Override

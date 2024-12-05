@@ -16,12 +16,12 @@ import androidx.core.content.ContextCompat;
 import java.util.ArrayList;
 
 import il.meuhedet.childtemiapplication.utils.Constants;
-import il.meuhedet.childtemiapplication.utils.Question;
+import il.meuhedet.childtemiapplication.utils.QuestionForCustomerSurvey;
 
 public class CustomerServiceSurveyActivity extends AppCompatActivity implements View.OnClickListener {
 
     private int currentPosition = 1;
-    private ArrayList<Question> questionList;
+    private ArrayList<QuestionForCustomerSurvey> questionForCustomerSurveyList;
     private int selectedOptionPosition = 0;
 
     private ProgressBar progressBar;
@@ -55,23 +55,23 @@ public class CustomerServiceSurveyActivity extends AppCompatActivity implements 
         tvOptionFour.setOnClickListener(this);
         btnSubmitQuestion.setOnClickListener(this);
 
-        questionList = Constants.getQuestions();
+        questionForCustomerSurveyList = Constants.getQuestionsForCustomerSurvey();
         setQuestion();
     }
 
     private void setQuestion() {
-        Log.i("Question list size is", String.valueOf(questionList.size()));
+        Log.i("QuestionForCustomerSurvey list size is", String.valueOf(questionForCustomerSurveyList.size()));
         defaultOptionsView();
-        Question question = questionList.get(currentPosition - 1);
+        QuestionForCustomerSurvey questionForCustomerSurvey = questionForCustomerSurveyList.get(currentPosition - 1);
         progressBar.setProgress(currentPosition);
         tvProgress.setText(currentPosition + "/" + progressBar.getMax());
-        tvQuestion.setText(question.getDescription());
-        tvOptionOne.setText(question.getOptionOne());
-        tvOptionTwo.setText(question.getOptionTwo());
-        tvOptionThree.setText(question.getOptionThree());
-        tvOptionFour.setText(question.getOptionFour());
+        tvQuestion.setText(questionForCustomerSurvey.getDescription());
+        tvOptionOne.setText(questionForCustomerSurvey.getOptionOne());
+        tvOptionTwo.setText(questionForCustomerSurvey.getOptionTwo());
+        tvOptionThree.setText(questionForCustomerSurvey.getOptionThree());
+        tvOptionFour.setText(questionForCustomerSurvey.getOptionFour());
 
-        if (currentPosition == questionList.size()) {
+        if (currentPosition == questionForCustomerSurveyList.size()) {
             btnSubmitQuestion.setText("FINISH");
         } else {
             btnSubmitQuestion.setText("SUBMIT");
@@ -111,11 +111,11 @@ public class CustomerServiceSurveyActivity extends AppCompatActivity implements 
         } else if (view.getId() == R.id.tv_option_four) {
             selectedOptionView(tvOptionFour, 4);
         } else if (view.getId() == R.id.btn_submit_question) {
-            if (currentPosition <= questionList.size()) {
+            if (currentPosition <= questionForCustomerSurveyList.size()) {
                 // Увеличиваем позицию для следующего вопроса
                 currentPosition++;
 
-                if (currentPosition <= questionList.size()) {
+                if (currentPosition <= questionForCustomerSurveyList.size()) {
                     setQuestion();
                 } else {
                     // Если вопросов больше нет, завершаем анкету

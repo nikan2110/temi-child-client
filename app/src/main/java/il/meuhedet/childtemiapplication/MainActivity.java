@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -36,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
                 mediaPlayer.pause();
                 mediaPlayer.seekTo(0);
                 danceButton.setImageResource(R.drawable.button_dance);
+                TextView cornetText = findViewById(R.id.topRightText);
+                cornetText.setText("בוא לרקוד אתי");
             } else {
                 mediaPlayer.start();
                 danceButton.setImageResource(R.drawable.button_dance_on);
@@ -65,32 +68,13 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-
-
-//        Button childSurveyButton = findViewById(R.id.childSurveyButton);
-//        childSurveyButton.setOnClickListener(view -> {
-//            Intent intent = new Intent(MainActivity.this, ChildSurveyActivity.class);
-//            startActivity(intent);
-//        });
-//
-//        Button customerSurveyButton = findViewById(R.id.customerSurveyButton);
-//        customerSurveyButton.setOnClickListener(view -> {
-//            Intent intent = new Intent(MainActivity.this, CustomerServiceSurveyActivity.class);
-//            startActivity(intent);
-//        });
-//
-//        Button chatWithGptForKidsButton = findViewById(R.id.childChatButton);
-//        chatWithGptForKidsButton.setOnClickListener(view -> {
-//            Intent intent = new Intent(MainActivity.this, ChildStoryActivity.class);
-//            startActivity(intent);
-//        });
-//
-//        Button childCartoonButton = findViewById(R.id.childCartoonButton);
-//        childCartoonButton.setOnClickListener(view -> {
-//            Intent intent = new Intent(MainActivity.this, ChildCartoonActivity.class);
-//            startActivity(intent);
-//        });
-
+        ImageButton childSurveyButton = findViewById(R.id.childSurveyButton);
+        childSurveyButton.setOnClickListener(view -> {
+            childSurveyButton.setImageResource(R.drawable.button_parents_on);
+            Intent intent = new Intent(MainActivity.this,
+                    ChildSurveyActivity.class);
+            startActivity(intent);
+        });
 
     }
 }

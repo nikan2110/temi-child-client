@@ -1,137 +1,91 @@
-<LinearLayout
+<RelativeLayout
+    android:id="@+id/mainBackground"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layoutDirection="rtl"
-    android:padding="16dp"
-    android:gravity="center_horizontal"
-    android:background="#F5F5F5">
+    android:background="@drawable/first_question"
+    tools:context=".ChildSurveyActivity">
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:layout_gravity="center"
-        android:indeterminate="true"
-        android:theme="@style/Widget.AppCompat.ProgressBar" />
-
-    <ImageView
-        android:id="@+id/resultImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/rimon_logo"
-        android:visibility="gone"
-        android:layout_gravity="center"
-        android:contentDescription="Result Image" />
-
-    <!-- Вопрос -->
+    <!-- Описание вопроса -->
     <TextView
-        android:id="@+id/questionText"
+        android:id="@+id/questionDescription"
+        android:layout_alignParentEnd="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="שאלה"
-        android:textSize="24sp"
-        android:textAlignment="center"
-        android:gravity="center"
-        android:layout_marginBottom="32dp"
-        android:textDirection="rtl" />
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="36dp"
+        android:gravity="end"
+        android:textAlignment="viewEnd"
+        android:text="לקפוץ על רגל אחת"
+        android:textSize="90sp"
+        android:lineHeight="97sp"
+        android:textColor="#3E3E3E"
+        android:fontFamily="@font/hebrew_font"
+        android:textStyle="bold" />
 
-    <!-- Поле ввода возраста -->
-    <EditText
-        android:id="@+id/ageInput"
-        android:layout_width="200dp"
+    <!-- Основной вопрос -->
+    <TextView
+        android:id="@+id/mainQuestion"
+        android:layout_width="543dp"
         android:layout_height="wrap_content"
-        android:hint="הזן את הגיל שלך"
-        android:inputType="number"
-        android:visibility="gone"
-        android:layout_marginBottom="32dp"
-        android:gravity="center"
-        android:textDirection="rtl" />
+        android:layout_below="@id/questionDescription"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:gravity="end"
+        android:textAlignment="viewEnd"
+        android:text="האם הילד שלך יכול לקפוץ על רגל אחת מבלי לאבד שיווי משקל?"
+        android:textColor="#848484"
+        android:textSize="42sp"
+        android:lineHeight="55sp"
+        android:ellipsize="none"
+        android:singleLine="false" />
 
-    <!-- Кнопка "Далее" -->
-    <Button
-        android:id="@+id/nextButton"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="הבא"
-        android:backgroundTint="#03A9F4"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:visibility="gone"
-        android:padding="16dp"
-        android:textDirection="rtl" />
-
-    <!-- Кнопки "כן" и "לא" -->
+    <!-- Контейнер для кнопок -->
     <LinearLayout
-        android:id="@+id/yesNoButtonsLayout"
+        android:id="@+id/buttonContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginBottom="32dp"
-        android:visibility="gone">
+        android:layout_below="@id/mainQuestion"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/yesButton"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:text="כן"
-            android:textSize="24sp"
-            android:layout_marginEnd="32dp"
-            android:backgroundTint="#4CAF50"
-            android:textColor="#FFFFFF"
-            android:padding="16dp"
-            android:textDirection="rtl" />
-
-        <Button
+        <!-- Картинка-кнопка "Нет" -->
+        <ImageButton
             android:id="@+id/noButton"
-            android:layout_width="120dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="לא"
-            android:textSize="24sp"
-            android:backgroundTint="#F44336"
-            android:textColor="#FFFFFF"
-            android:padding="16dp"
-            android:textDirection="rtl" />
+            android:src="@drawable/button_no"
+            android:layout_marginEnd="16dp"
+            android:background="@null"
+            android:contentDescription="No button" />
+
+        <!-- Картинка-кнопка "Да" -->
+        <ImageButton
+            android:id="@+id/yesButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/button_yes"
+            android:background="@null"
+            android:contentDescription="Yes button" />
+
+
     </LinearLayout>
 
-    <!-- Поле ввода дополнительной информации -->
-    <EditText
-        android:id="@+id/additionalInfoInput"
-        android:layout_width="match_parent"
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="הזן מידע נוסף:"
-        android:visibility="gone"
-        android:layout_marginBottom="32dp"
-        android:textDirection="rtl" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="71dp"
+        android:layout_marginBottom="39dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Back Button"
+        android:src="@drawable/button_back" />
 
-    <!-- Кнопка "שלח" -->
-    <Button
-        android:id="@+id/submitButton"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="שלח"
-        android:backgroundTint="#03A9F4"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:visibility="gone"
-        android:padding="16dp"
-        android:textDirection="rtl" />
-
-    <!-- Поле для отображения результата -->
-    <TextView
-        android:id="@+id/resultText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:layout_marginTop="16dp"
-        android:padding="16dp"
-        android:gravity="center"
-        android:background="#E0E0E0"
-        android:textSize="18sp"
-        android:textColor="#000000"
-        android:text="Результат будет отображён здесь"
-        android:textDirection="rtl" />
-</LinearLayout>
+</RelativeLayout>

@@ -81,7 +81,7 @@
 
 
     <ImageButton
-        android:id="@+id/rightButton1"
+        android:id="@+id/childSurveyButton"
         android:layout_width="363dp"
         android:layout_height="356dp"
         android:layout_marginTop="224dp"
@@ -102,7 +102,7 @@
         android:contentDescription="Button 2"
         android:src="@drawable/button_seker"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rightButton1" />
+        app:layout_constraintTop_toBottomOf="@+id/childSurveyButton" />
 
     <!-- Кнопка для иврита -->
     <androidx.constraintlayout.widget.ConstraintLayout

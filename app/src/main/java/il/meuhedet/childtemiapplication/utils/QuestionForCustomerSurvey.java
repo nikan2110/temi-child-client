@@ -1,6 +1,6 @@
 package il.meuhedet.childtemiapplication.utils;
 
-public class Question {
+public class QuestionForCustomerSurvey {
     private int id;
     private String description;
     private String optionOne;
@@ -9,7 +9,7 @@ public class Question {
     private String optionFour;
 
     // Конструктор
-    public Question(int id, String description, String optionOne, String optionTwo, String optionThree, String optionFour) {
+    public QuestionForCustomerSurvey(int id, String description, String optionOne, String optionTwo, String optionThree, String optionFour) {
         this.id = id;
         this.description = description;
         this.optionOne = optionOne;
@@ -69,7 +69,7 @@ public class Question {
 
     @Override
     public String toString() {
-        return "Question{" +
+        return "QuestionForCustomerSurvey{" +
                 "id=" + id +
                 ", description='" + description + '\'' +
                 ", optionOne='" + optionOne + '\'' +
