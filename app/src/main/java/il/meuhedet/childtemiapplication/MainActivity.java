@@ -25,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
         ImageButton musicButton = findViewById(R.id.musicButton);
         musicButton.setOnClickListener(view -> {
             musicButton.setImageResource(R.drawable.button_sing_on);
-            Intent intent = new Intent(MainActivity.this, ChildCartoonActivity.class);
+            Intent intent = new Intent(MainActivity.this,
+                    ChildCartoonActivity.class);
             startActivity(intent);
         });
 
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 mediaPlayer.start();
                 danceButton.setImageResource(R.drawable.button_dance_on);
             }
-            isPlaying = !isPlaying; // Переключаем состояние
+            isPlaying = !isPlaying;
         });
 
         ImageButton sekerButton = findViewById(R.id.sekerButton);

@@ -2,16 +2,17 @@ package il.meuhedet.childtemiapplication;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Typeface;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 
@@ -22,16 +23,16 @@ public class CustomerServiceSurveyActivity extends AppCompatActivity implements 
 
     private int currentPosition = 1;
     private ArrayList<QuestionForCustomerSurvey> questionForCustomerSurveyList;
-    private int selectedOptionPosition = 0;
+    private LinearLayout selectedOption = null; // Ссылка на выбранный вариант
 
     private ProgressBar progressBar;
     private TextView tvProgress;
     private TextView tvQuestion;
 
-    private TextView tvOptionOne;
-    private TextView tvOptionTwo;
-    private TextView tvOptionThree;
-    private TextView tvOptionFour;
+    private LinearLayout llOptionOne;
+    private LinearLayout llOptionTwo;
+    private LinearLayout llOptionThree;
+    private LinearLayout llOptionFour;
 
     private Button btnSubmitQuestion;
 
@@ -40,19 +41,23 @@ public class CustomerServiceSurveyActivity extends AppCompatActivity implements 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_service_survey);
 
+        // Инициализация элементов
         progressBar = findViewById(R.id.progress_bar);
         tvProgress = findViewById(R.id.tv_progress);
         tvQuestion = findViewById(R.id.tv_question);
-        tvOptionOne = findViewById(R.id.tv_option_one);
-        tvOptionTwo = findViewById(R.id.tv_option_two);
-        tvOptionThree = findViewById(R.id.tv_option_three);
-        tvOptionFour = findViewById(R.id.tv_option_four);
+
+        llOptionOne = findViewById(R.id.ll_option_one);
+        llOptionTwo = findViewById(R.id.ll_option_two);
+        llOptionThree = findViewById(R.id.ll_option_three);
+        llOptionFour = findViewById(R.id.ll_option_four);
+
         btnSubmitQuestion = findViewById(R.id.btn_submit_question);
 
-        tvOptionOne.setOnClickListener(this);
-        tvOptionTwo.setOnClickListener(this);
-        tvOptionThree.setOnClickListener(this);
-        tvOptionFour.setOnClickListener(this);
+        // Установка слушателей
+        llOptionOne.setOnClickListener(this);
+        llOptionTwo.setOnClickListener(this);
+        llOptionThree.setOnClickListener(this);
+        llOptionFour.setOnClickListener(this);
         btnSubmitQuestion.setOnClickListener(this);
 
         questionForCustomerSurveyList = Constants.getQuestionsForCustomerSurvey();
@@ -60,71 +65,80 @@ public class CustomerServiceSurveyActivity extends AppCompatActivity implements 
     }
 
     private void setQuestion() {
-        Log.i("QuestionForCustomerSurvey list size is", String.valueOf(questionForCustomerSurveyList.size()));
-        defaultOptionsView();
-        QuestionForCustomerSurvey questionForCustomerSurvey = questionForCustomerSurveyList.get(currentPosition - 1);
+        Log.i("Survey", "Loading question " + currentPosition);
+
+        // Сбрасываем выделение
+        resetOptionSelection();
+
+        // Получаем текущий вопрос
+        QuestionForCustomerSurvey question = questionForCustomerSurveyList.get(currentPosition - 1);
+
+        // Устанавливаем данные вопроса
+        tvQuestion.setText(question.getDescription());
         progressBar.setProgress(currentPosition);
         tvProgress.setText(currentPosition + "/" + progressBar.getMax());
-        tvQuestion.setText(questionForCustomerSurvey.getDescription());
-        tvOptionOne.setText(questionForCustomerSurvey.getOptionOne());
-        tvOptionTwo.setText(questionForCustomerSurvey.getOptionTwo());
-        tvOptionThree.setText(questionForCustomerSurvey.getOptionThree());
-        tvOptionFour.setText(questionForCustomerSurvey.getOptionFour());
 
-        if (currentPosition == questionForCustomerSurveyList.size()) {
-            btnSubmitQuestion.setText("FINISH");
-        } else {
-            btnSubmitQuestion.setText("SUBMIT");
-        }
+        // Устанавливаем текст для вариантов
+        ((TextView) llOptionOne.findViewById(R.id.tv_option_one)).setText(question.getOptionOne());
+        ((TextView) llOptionTwo.findViewById(R.id.tv_option_two)).setText(question.getOptionTwo());
+        ((TextView) llOptionThree.findViewById(R.id.tv_option_three)).setText(question.getOptionThree());
+        ((TextView) llOptionFour.findViewById(R.id.tv_option_four)).setText(question.getOptionFour());
     }
 
-    private void defaultOptionsView() {
-        ArrayList<TextView> options = new ArrayList<>();
-        options.add(tvOptionOne);
-        options.add(tvOptionTwo);
-        options.add(tvOptionThree);
-        options.add(tvOptionFour);
+    private void resetOptionSelection() {
+        // Сбрасываем фон всех вариантов на стандартный
+        resetButtonBackground(llOptionOne);
+        resetButtonBackground(llOptionTwo);
+        resetButtonBackground(llOptionThree);
+        resetButtonBackground(llOptionFour);
 
-        for (TextView option : options) {
-            option.setTextColor(Color.parseColor("#7A8089"));
-            option.setTypeface(Typeface.DEFAULT);
-            option.setBackground(ContextCompat.getDrawable(this, R.drawable.default_option_border_bg));
-        }
+        selectedOption = null; // Сбрасываем выбранный вариант
     }
 
-    private void selectedOptionView(TextView tv, int selectedOptionNum) {
-        defaultOptionsView();
-        selectedOptionPosition = selectedOptionNum;
-        tv.setTextColor(Color.parseColor("#363A43"));
-        tv.setTypeface(tv.getTypeface(), Typeface.BOLD);
-        tv.setBackground(ContextCompat.getDrawable(this, R.drawable.selected_option_border_bg));
+    private void resetButtonBackground(LinearLayout button) {
+        // Клонируем Drawable, чтобы сброс был уникальным для каждой кнопки
+        Drawable drawable = getResources().getDrawable(R.drawable.button_option).mutate();
+        button.setBackground(drawable);
+    }
+
+    private void selectOption(LinearLayout option) {
+        resetOptionSelection(); // Сбрасываем фон всех вариантов
+
+        // Устанавливаем основной фон
+        Drawable drawable = getResources().getDrawable(R.drawable.button_option).mutate();
+        option.setBackground(drawable);
+
+        // Накладываем дополнительный цвет поверх основного фона
+        option.getBackground().setColorFilter(Color.parseColor("#D3D8D1"), PorterDuff.Mode.MULTIPLY);
+
+        selectedOption = option; // Устанавливаем текущий выбранный вариант
     }
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.tv_option_one) {
-            selectedOptionView(tvOptionOne, 1);
-        } else if (view.getId() == R.id.tv_option_two) {
-            selectedOptionView(tvOptionTwo, 2);
-        } else if (view.getId() == R.id.tv_option_three) {
-            selectedOptionView(tvOptionThree, 3);
-        } else if (view.getId() == R.id.tv_option_four) {
-            selectedOptionView(tvOptionFour, 4);
+        if (view.getId() == R.id.ll_option_one) {
+            selectOption(llOptionOne);
+        } else if (view.getId() == R.id.ll_option_two) {
+            selectOption(llOptionTwo);
+        } else if (view.getId() == R.id.ll_option_three) {
+            selectOption(llOptionThree);
+        } else if (view.getId() == R.id.ll_option_four) {
+            selectOption(llOptionFour);
         } else if (view.getId() == R.id.btn_submit_question) {
-            if (currentPosition <= questionForCustomerSurveyList.size()) {
-                // Увеличиваем позицию для следующего вопроса
-                currentPosition++;
-
-                if (currentPosition <= questionForCustomerSurveyList.size()) {
-                    setQuestion();
-                } else {
-                    // Если вопросов больше нет, завершаем анкету
-                    Intent intent = new Intent(this, MainActivity.class);
-                    startActivity(intent);
-                }
+            if (selectedOption == null) {
+                Log.i("Survey", "No option selected");
+                return; // Если ничего не выбрано, ничего не делаем
             }
-            // Сбрасываем выбранный вариант
-            selectedOptionPosition = 0;
+
+            // Логика перехода к следующему вопросу
+            if (currentPosition < questionForCustomerSurveyList.size()) {
+                currentPosition++;
+                setQuestion();
+            } else {
+                Log.i("Survey", "Survey completed");
+                Intent intent = new Intent(this, MainActivity.class); // Переход на главную
+                startActivity(intent);
+            }
         }
     }
 }

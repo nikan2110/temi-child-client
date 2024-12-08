@@ -3,12 +3,12 @@ package il.meuhedet.childtemiapplication.utils;
 import java.util.ArrayList;
 
 public class Constants {
-    public static final String OPTION1 = getEmojiByUnicode(0x1F60A) + " מרוצה במידה רבה מאוד ";
-    public static final String OPTION2 = getEmojiByUnicode(0x1F60C) + " מרוצה במידה רבה ";
-    public static final String OPTION3 = getEmojiByUnicode(0x1F614) + " מרוצה במידה בינונית ";
-    public static final String OPTION4 = getEmojiByUnicode(0x1F621) + " כלל לא מרוצה ";
+    public static final String OPTION1 = "מרוצה במידה רבה מאוד";
+    public static final String OPTION2 =  "מרוצה במידה רבה";
+    public static final String OPTION3 = "מרוצה במידה בינונית";
+    public static final String OPTION4 =  "כלל לא מרוצה";
 
-    public static final String URL = "http://10.100.102.128:8080/";
+    public static final String URL = "http://172.18.1.64:8080/";
 
     public static ArrayList<QuestionForCustomerSurvey> getQuestionsForCustomerSurvey() {
         ArrayList<QuestionForCustomerSurvey> questionsList = new ArrayList<>();
@@ -62,10 +62,25 @@ public class Constants {
                 "האם הילד שלך משחק בשיתוף פעולה עם ילדים אחרים, כמו לקחת תורות ולשתף צעצועים?",
                 "fourth_question");
 
+        QuestionForChildSurvey questionForChildSurvey5 = new QuestionForChildSurvey(
+                "להתלבש לבד",
+                "האם הילד שלך יכול להתלבש בעצמו ללא עזרה, כולל לנעול נעליים וגרביים?"
+                ,"fifth_question"
+        );
+
+        QuestionForChildSurvey questionForChildSurvey6 = new QuestionForChildSurvey(
+                "פתרון בעיות",
+                "האם הילד שלך יכול להשלים פאזל פשוט (למשל, 4-6 חלקים) ללא עזרה?"
+                ,"sixth_question"
+        );
+
+
         questionListForChildSurvey.add(questionForChildSurvey1);
         questionListForChildSurvey.add(questionForChildSurvey2);
         questionListForChildSurvey.add(questionForChildSurvey3);
         questionListForChildSurvey.add(questionForChildSurvey4);
+        questionListForChildSurvey.add(questionForChildSurvey5);
+        questionListForChildSurvey.add(questionForChildSurvey6);
 
         return questionListForChildSurvey;
     }

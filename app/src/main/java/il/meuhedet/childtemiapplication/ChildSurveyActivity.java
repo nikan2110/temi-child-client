@@ -1,8 +1,15 @@
 package il.meuhedet.childtemiapplication;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.Gravity;
+import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -80,8 +87,6 @@ public class ChildSurveyActivity extends AppCompatActivity {
                     getPackageName()
             );
             mainBackground.setBackgroundResource(backgroundResource);
-        } else {
-            Toast.makeText(this, "Questions were finished", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -92,7 +97,66 @@ public class ChildSurveyActivity extends AppCompatActivity {
         if (currentQuestionIndex < questions.size()) {
             loadQuestion();
         } else {
-            Toast.makeText(this, "Questions were finished", Toast.LENGTH_SHORT).show();
+            showRecommendation();
+        }
+    }
+
+    private void showRecommendation() {
+        int backgroundResource = getResources()
+                .getIdentifier("recommendation", "drawable", getPackageName());
+        mainBackground.setBackgroundResource(backgroundResource);
+
+        buttonYes.setVisibility(View.INVISIBLE);
+        buttonNo.setVisibility(View.INVISIBLE);
+
+        questionDescription.setText("המלצות");
+        mainQuestion.setText("");
+
+        LinearLayout recommendationsContainer = findViewById(R.id.recommendationsContainer);
+        recommendationsContainer.setVisibility(View.VISIBLE);
+        recommendationsContainer.removeAllViews();
+
+        String[] recommendations = {
+                "אפשר להציג את התשובות כגרפים כוללים",
+                "או כמכל רצ - תלוי בכמות המלל",
+                "אם תשלחו לי את הטקסט או טקסט לדוגמא\n  אוכל לעצב או לתת המלצות"
+        };
+
+        for (String recommendation : recommendations) {
+
+            LinearLayout recommendationLayout = new LinearLayout(this);
+            recommendationLayout.setOrientation(LinearLayout.HORIZONTAL);
+            recommendationLayout.setPadding(0, 16, 0, 16);
+            recommendationLayout.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
+
+
+            TextView recommendationView = new TextView(this);
+            recommendationView.setText(recommendation);
+            recommendationView.setTextSize(42);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                recommendationView.setLineHeight(55);
+            }
+            recommendationView.setTextColor(Color.BLACK);
+            recommendationView.setGravity(Gravity.CENTER_VERTICAL);
+            recommendationView.setSingleLine(false);
+            recommendationView.setMaxLines(2);
+            recommendationView.setEllipsize(TextUtils.TruncateAt.END);
+            LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+            textParams.setMargins(0, 0, 16, 0);
+            recommendationView.setLayoutParams(textParams);
+
+            ImageView circleIcon = new ImageView(this);
+            circleIcon.setImageResource(R.drawable.circle_icon);
+            LinearLayout.LayoutParams circleParams = new LinearLayout.LayoutParams(24, 24);
+            circleIcon.setLayoutParams(circleParams);
+
+            recommendationLayout.addView(recommendationView);
+            recommendationLayout.addView(circleIcon);
+
+            recommendationsContainer.addView(recommendationLayout);
         }
     }
 }

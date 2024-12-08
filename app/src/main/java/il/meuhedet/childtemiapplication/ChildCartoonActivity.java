@@ -27,7 +27,8 @@ public class ChildCartoonActivity extends AppCompatActivity {
         pausePlayButton.setVisibility(View.INVISIBLE);
         backButton = findViewById(R.id.backButton);
          
-        Uri videoUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.cartoon);
+        Uri videoUri = Uri.parse("android.resource://" +
+                getPackageName() + "/" + R.raw.cartoon);
         videoView.setVideoURI(videoUri);
 
         videoView.start();

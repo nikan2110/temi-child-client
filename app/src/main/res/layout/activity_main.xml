@@ -1,5 +1,4 @@
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -25,30 +24,30 @@
         android:id="@+id/leftButtons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="100dp"
-        android:layout_marginStart="16dp">
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <!-- Кнопка 1 -->
         <ImageButton
             android:id="@+id/musicButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/button_sing"
+            android:background="@android:color/transparent"
             android:contentDescription="Music Button"
-            android:background="@android:color/transparent" />
+            android:src="@drawable/button_sing" />
 
         <!-- Кнопка 2 -->
         <ImageButton
             android:id="@+id/danceButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/button_dance"
-            android:contentDescription="Dance Button"
+            android:layout_marginTop="16dp"
             android:background="@android:color/transparent"
-            android:layout_marginTop="16dp" />
+            android:contentDescription="Dance Button"
+            android:src="@drawable/button_dance" />
 
         <!-- Кнопка 3 -->
         <ImageButton
@@ -67,17 +66,17 @@
         android:id="@+id/topRightText"
         android:layout_width="486dp"
         android:layout_height="95dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginTop="36dp"
-        android:text="מה הגיל שלי?"
-        android:textSize="90sp"
-        android:lineHeight="97sp"
-        android:textColor="#3E3E3E"
+        android:layout_marginEnd="16dp"
         android:fontFamily="@font/hebrew_font"
-        android:textStyle="bold"
         android:gravity="end"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:lineHeight="97sp"
+        android:text="מה הגיל שלי?"
+        android:textColor="#3E3E3E"
+        android:textSize="90sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <ImageButton
@@ -109,17 +108,17 @@
         android:id="@+id/hebButtonLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/araButtonLayout"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="0dp"
         android:layout_marginBottom="-15dp"
-        android:layout_marginEnd="0dp">
+        app:layout_constraintBottom_toTopOf="@id/araButtonLayout"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <ImageView
             android:id="@+id/hebButtonBackground"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/button_language_on"
             android:contentDescription="Hebrew Button Background"
+            android:src="@drawable/button_language_on"
             app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
@@ -145,17 +144,17 @@
         android:id="@+id/araButtonLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/rusButtonLayout"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="0dp"
         android:layout_marginBottom="-15dp"
-        android:layout_marginEnd="0dp">
+        app:layout_constraintBottom_toTopOf="@id/rusButtonLayout"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <ImageView
             android:id="@+id/araButtonBackground"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/button_language_off"
             android:contentDescription="Arabic Button Background"
+            android:src="@drawable/button_language_off"
             app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
@@ -164,8 +163,8 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-medium"
             android:gravity="center"
-            android:text="العربية"
             android:lineHeight="47sp"
+            android:text="العربية"
             android:textColor="#848484"
             android:textSize="36sp"
             app:layout_constraintBottom_toBottomOf="@+id/araButtonBackground"
@@ -181,17 +180,17 @@
         android:id="@+id/rusButtonLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="0dp"
         android:layout_marginBottom="-15dp"
-        android:layout_marginEnd="0dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <ImageView
             android:id="@+id/rusButtonBackground"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/button_language_off"
-            android:contentDescription="Russian Button Background" />
+            android:contentDescription="Russian Button Background"
+            android:src="@drawable/button_language_off" />
 
         <TextView
             android:id="@+id/rusButtonText"
@@ -199,8 +198,8 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-medium"
             android:gravity="center"
-            android:text="Русский"
             android:lineHeight="42sp"
+            android:text="Русский"
             android:textColor="#848484"
             android:textSize="32sp"
             app:layout_constraintBottom_toBottomOf="@+id/rusButtonBackground"
