@@ -71,4 +71,6 @@ dependencies {
     debugImplementation(libs.ui.test.manifest)
     implementation("com.squareup.okhttp3:okhttp:4.9.3")
 
+    implementation("com.robotemi:sdk:1.135.1")
+
 }

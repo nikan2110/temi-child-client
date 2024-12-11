@@ -7,7 +7,9 @@ public class QuestionForChildSurvey {
     String questionText;
     String imageName;
 
-    public QuestionForChildSurvey(String questionDescription, String questionText, String imageName) {
+    public QuestionForChildSurvey(String questionDescription,
+                                  String questionText,
+                                  String imageName) {
         this.questionDescription = questionDescription;
         this.questionText = questionText;
         this.imageName = imageName;
@@ -17,24 +19,12 @@ public class QuestionForChildSurvey {
         return questionDescription;
     }
 
-    public void setQuestionDescription(String questionDescription) {
-        this.questionDescription = questionDescription;
-    }
-
     public String getQuestionText() {
         return questionText;
     }
 
-    public void setQuestionText(String questionText) {
-        this.questionText = questionText;
-    }
-
     public String getImageName() {
         return imageName;
-    }
-
-    public void setImageName(String imageName) {
-        this.imageName = imageName;
     }
 
     @Override

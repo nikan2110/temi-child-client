@@ -8,33 +8,30 @@ public class Constants {
     public static final String OPTION3 = "מרוצה במידה בינונית";
     public static final String OPTION4 =  "כלל לא מרוצה";
 
-    public static final String URL = "http://172.18.1.64:8080/";
+    public static final String URL = "http://20.229.141.8:5001/";
 
     public static ArrayList<QuestionForCustomerSurvey> getQuestionsForCustomerSurvey() {
         ArrayList<QuestionForCustomerSurvey> questionsList = new ArrayList<>();
 
-        // 1
         QuestionForCustomerSurvey questionForCustomerSurvey1 = new QuestionForCustomerSurvey(1,
                 "כיצד היית מדרג את שביעות רצונך מהשירות שניתן לך במרפאה?",
                 OPTION1, OPTION2, OPTION3, OPTION4);
-        questionsList.add(questionForCustomerSurvey1);
 
-        // 2
         QuestionForCustomerSurvey questionForCustomerSurvey2 = new QuestionForCustomerSurvey(2,
                 "כיצד היית מדרג את שביעות רצונך מהסדר והניקיון במרפאה?",
                 OPTION1, OPTION2, OPTION3, OPTION4);
-        questionsList.add(questionForCustomerSurvey2);
 
-        // 3
         QuestionForCustomerSurvey questionForCustomerSurvey3 = new QuestionForCustomerSurvey(3,
                 "כיצד היית מדרג את שביעות רצונך מזמן ההמתנה לקבלת שירות במרפאה?",
                 OPTION1, OPTION2, OPTION3, OPTION4);
-        questionsList.add(questionForCustomerSurvey3);
 
-        // 4
         QuestionForCustomerSurvey questionForCustomerSurvey4 = new QuestionForCustomerSurvey(4,
                 "כיצד היית מדרג את שביעות רצונך מהיחס והאדיבות של הרופא?",
                 OPTION1, OPTION2, OPTION3, OPTION4);
+
+        questionsList.add(questionForCustomerSurvey1);
+        questionsList.add(questionForCustomerSurvey2);
+        questionsList.add(questionForCustomerSurvey3);
         questionsList.add(questionForCustomerSurvey4);
 
         return questionsList;
@@ -85,7 +82,4 @@ public class Constants {
         return questionListForChildSurvey;
     }
 
-    private static String getEmojiByUnicode(int unicode) {
-        return new String(Character.toChars(unicode));
-    }
 }

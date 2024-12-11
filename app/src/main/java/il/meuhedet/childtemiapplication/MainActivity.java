@@ -1,8 +1,10 @@
 package il.meuhedet.childtemiapplication;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -16,6 +18,10 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean isPlaying = false;
     private MediaPlayer mediaPlayer;
+    private ImageButton hebrewButton;
+    private TextView hebrewTextButton;
+    private ImageButton russianButton;
+    private TextView russianTextButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +34,26 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this,
                     ChildCartoonActivity.class);
             startActivity(intent);
+        });
+
+        hebrewButton = findViewById(R.id.hebButtonBackground);
+        russianButton = findViewById(R.id.rusButtonBackground);
+
+        hebrewTextButton = findViewById(R.id.hebButtonText);
+        russianTextButton = findViewById(R.id.rusButtonText);
+
+        hebrewButton.setOnClickListener(view -> {
+            russianTextButton.setTextColor(Color.parseColor("#848484"));
+            russianButton.setImageResource(R.drawable.button_language_off);
+            hebrewTextButton.setTextColor(Color.parseColor("#FFFFFF"));
+            hebrewButton.setImageResource(R.drawable.button_language_on);
+        });
+
+        russianButton.setOnClickListener(view -> {
+            hebrewTextButton.setTextColor(Color.parseColor("#848484"));
+            hebrewButton.setImageResource(R.drawable.button_language_off);
+            russianButton.setImageResource(R.drawable.button_language_on);
+            russianTextButton.setTextColor(Color.parseColor("#FFFFFF"));
         });
 
         ImageButton danceButton = findViewById(R.id.danceButton);
@@ -66,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
             chatButton.setImageResource(R.drawable.button_talk_on);
             Intent intent = new Intent(MainActivity.this,
                     ChildStoryActivity.class);
+            finish();
             startActivity(intent);
         });
 

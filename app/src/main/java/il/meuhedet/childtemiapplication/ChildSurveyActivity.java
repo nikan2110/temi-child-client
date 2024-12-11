@@ -110,16 +110,16 @@ public class ChildSurveyActivity extends AppCompatActivity {
         buttonNo.setVisibility(View.INVISIBLE);
 
         questionDescription.setText("המלצות");
-        mainQuestion.setText("");
+        mainQuestion.setText("כמה המלצות שיכולות לעזור");
 
         LinearLayout recommendationsContainer = findViewById(R.id.recommendationsContainer);
         recommendationsContainer.setVisibility(View.VISIBLE);
         recommendationsContainer.removeAllViews();
 
         String[] recommendations = {
-                "אפשר להציג את התשובות כגרפים כוללים",
-                "או כמכל רצ - תלוי בכמות המלל",
-                "אם תשלחו לי את הטקסט או טקסט לדוגמא\n  אוכל לעצב או לתת המלצות"
+                "התייעצות עם מומחה: כדאי לפנות לרופא\n ילדים או פיזיותרפיסט שמתמחה\n בהתפתחות הילד",
+                "תרגול בבית :עודדו את הילד להשתתף\n בפעילויות שמפתחות מיומנויות מוטוריות\n גסות, כמו קפיצה על טרמפולינה ריצה ומשחקי תופסת",
+                "פעילויות ספורטיביות: הרשמה לחוגי ספורט\n כמו שחייה, כדורגל או ריקוד יכולה לעזור בשיפור\n הקואורדינציה והאיזון"
         };
 
         for (String recommendation : recommendations) {
@@ -139,7 +139,7 @@ public class ChildSurveyActivity extends AppCompatActivity {
             recommendationView.setTextColor(Color.BLACK);
             recommendationView.setGravity(Gravity.CENTER_VERTICAL);
             recommendationView.setSingleLine(false);
-            recommendationView.setMaxLines(2);
+            recommendationView.setMaxLines(3);
             recommendationView.setEllipsize(TextUtils.TruncateAt.END);
             LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,

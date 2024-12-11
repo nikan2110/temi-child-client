@@ -1,7 +1,10 @@
 package il.meuhedet.childtemiapplication;
 
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,12 +13,25 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.robotemi.sdk.Robot;
+import com.robotemi.sdk.SttLanguage;
+import com.robotemi.sdk.SttRequest;
+import com.robotemi.sdk.TtsRequest;
+import com.robotemi.sdk.constants.SdkConstants;
+import com.robotemi.sdk.listeners.OnRobotReadyListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 
 import il.meuhedet.childtemiapplication.utils.Constants;
 import okhttp3.MediaType;
@@ -24,22 +40,21 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class ChildStoryActivity extends AppCompatActivity {
+public class ChildStoryActivity extends AppCompatActivity
+        implements OnRobotReadyListener, Robot.AsrListener, Robot.TtsListener  {
 
-    private TextView storyText;
-    private EditText nameInput;
-    private Button submitButton;
     private ProgressBar progressBar;
     private ImageButton backButton;
+    private Robot robot;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_child_story);
 
-        storyText = findViewById(R.id.storyText);
-        nameInput = findViewById(R.id.nameInput);
-        submitButton = findViewById(R.id.submitButton);
+        robot = Robot.getInstance();
+        robot.setKioskModeOn(true);
+
         progressBar = findViewById(R.id.progressBar);
         backButton = findViewById(R.id.backButton);
 
@@ -50,24 +65,22 @@ public class ChildStoryActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        Toast.makeText(this, "Tell me your name and I'll tell you a story about you!",
-                Toast.LENGTH_LONG).show();
+    }
 
-        submitButton.setOnClickListener(view -> {
-            String name = nameInput.getText().toString().trim();
-            if (name.isEmpty()) {
-                Toast.makeText(this, "Please enter your name!",
-                        Toast.LENGTH_SHORT).show();
-                return;
-            }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        robot.addOnRobotReadyListener(this);
+        robot.addAsrListener(this);
+        robot.addTtsListener(this);
+    }
 
-            nameInput.setVisibility(View.GONE);
-            submitButton.setVisibility(View.GONE);
-
-            progressBar.setVisibility(View.VISIBLE);
-
-            sendNameToServer(name);
-        });
+    @Override
+    protected void onStop() {
+        super.onStop();
+        robot.removeOnRobotReadyListener(this);
+        robot.removeAsrListener(this);
+        robot.removeTtsListener(this);
     }
 
     private void sendNameToServer(String message) {
@@ -78,7 +91,8 @@ public class ChildStoryActivity extends AppCompatActivity {
             e.printStackTrace();
             runOnUiThread(() -> {
                 progressBar.setVisibility(View.GONE);
-                Toast.makeText(this, "Data generation error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Data generation error",
+                        Toast.LENGTH_SHORT).show();
             });
             return;
         }
@@ -93,6 +107,7 @@ public class ChildStoryActivity extends AppCompatActivity {
 
         Request request = new Request.Builder()
                 .url(Constants.URL + "child_chat")
+                .addHeader("language", "he")
                 .post(body)
                 .build();
 
@@ -104,29 +119,72 @@ public class ChildStoryActivity extends AppCompatActivity {
                     JSONObject jsonResponse = new JSONObject(responseBody);
                     String story = jsonResponse.getString("reply");
 
+                    Log.i("story", story);
+
                     runOnUiThread(() -> {
                         progressBar.setVisibility(View.GONE);
-                        showStory(story);
+                            robot.speak(TtsRequest.create(story, false,
+                                    TtsRequest.Language.HE_IL, true));
+
                     });
                 } else {
                     runOnUiThread(() -> {
                         progressBar.setVisibility(View.GONE);
-                        Toast.makeText(this, "Server error: " + response.code(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Server error: " + response.code(),
+                                Toast.LENGTH_SHORT).show();
                     });
                 }
             } catch (IOException | JSONException e) {
                 runOnUiThread(() -> {
                     progressBar.setVisibility(View.GONE);
                     e.printStackTrace();
-                    Toast.makeText(this, "Server connection error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Server connection error",
+                            Toast.LENGTH_SHORT).show();
                 });
             }
         }).start();
     }
 
-    private void showStory(String story) {
 
-        storyText.setVisibility(View.VISIBLE);
-        storyText.setText(story);
+    @Override
+    public void onAsrResult(@NonNull String asrResult, @NonNull SttLanguage sttLanguage) {
+        Log.i("sttLanguage", sttLanguage.name());
+        Log.i("AsrResult", "Received asrResult: " + asrResult);
+        if (!asrResult.isEmpty()) {
+            sendNameToServer(asrResult);
+        }
+    }
+
+    @Override
+    public void onTtsStatusChanged(@NonNull TtsRequest ttsRequest) {
+        Log.i("Status", ttsRequest.getStatus().toString());
+        if (ttsRequest.getStatus() == TtsRequest.Status.COMPLETED) {
+            finish();
+        }
+    }
+
+    @Override
+    public void onRobotReady(boolean isReady) {
+        if (isReady) {
+            speakGreeting();
+        }
+    }
+
+    private void speakGreeting() {
+        String greetingText = "";
+        TtsRequest ttsRequest = null;
+        List<SttLanguage> languages = new ArrayList<>();
+
+            greetingText = "היי, תגיד לי את שמך ואני אספר לך סיפור.";
+            ttsRequest = TtsRequest.create(greetingText,
+                    false, TtsRequest.Language.HE_IL, true);
+            languages.add(SttLanguage.IW_IL);
+            robot.setAsrLanguages(languages);
+
+            SttRequest sttRequest = new SttRequest(Collections.singletonList(SttLanguage.IW_IL),
+                    120, false
+            );
+            robot.askQuestion(ttsRequest,sttRequest);
+
     }
 }

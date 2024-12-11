@@ -8,8 +8,12 @@ public class QuestionForCustomerSurvey {
     private String optionThree;
     private String optionFour;
 
-    // Конструктор
-    public QuestionForCustomerSurvey(int id, String description, String optionOne, String optionTwo, String optionThree, String optionFour) {
+    public QuestionForCustomerSurvey(int id,
+                                     String description,
+                                     String optionOne,
+                                     String optionTwo,
+                                     String optionThree,
+                                     String optionFour) {
         this.id = id;
         this.description = description;
         this.optionOne = optionOne;
@@ -18,7 +22,6 @@ public class QuestionForCustomerSurvey {
         this.optionFour = optionFour;
     }
 
-    // Геттеры и сеттеры
     public int getId() {
         return id;
     }
@@ -31,41 +34,26 @@ public class QuestionForCustomerSurvey {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public String getOptionOne() {
         return optionOne;
     }
 
-    public void setOptionOne(String optionOne) {
-        this.optionOne = optionOne;
-    }
 
     public String getOptionTwo() {
         return optionTwo;
     }
 
-    public void setOptionTwo(String optionTwo) {
-        this.optionTwo = optionTwo;
-    }
 
     public String getOptionThree() {
         return optionThree;
     }
 
-    public void setOptionThree(String optionThree) {
-        this.optionThree = optionThree;
-    }
 
     public String getOptionFour() {
         return optionFour;
     }
 
-    public void setOptionFour(String optionFour) {
-        this.optionFour = optionFour;
-    }
 
     @Override
     public String toString() {
